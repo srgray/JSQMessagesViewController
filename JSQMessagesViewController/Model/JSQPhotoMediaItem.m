@@ -84,6 +84,20 @@
     return self.cachedImageView;
 }
 
+- (CGSize)mediaViewDisplaySize {
+    const CGFloat defaultSize = 256;
+    CGSize thumbSize = CGSizeMake(defaultSize, defaultSize );
+    if (self.image.size.height > 0 && self.image.size.width > 0) {
+        CGFloat aspect = self.image.size.width / self.image.size.height;
+        if (self.image.size.width > self.image.size.height) {
+            thumbSize = CGSizeMake(defaultSize, defaultSize / aspect);
+        } else {
+            thumbSize = CGSizeMake(defaultSize * aspect, defaultSize);
+        }
+    }
+    return thumbSize;
+}
+
 - (NSUInteger)mediaHash
 {
     return self.hash;
